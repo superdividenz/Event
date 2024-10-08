@@ -1,0 +1,32 @@
+const SvgSeatingLayout = () => {
+  const [selectedTable, setSelectedTable] = useState(null);
+
+  const handleSelectTable = (tableNumber) => {
+    setSelectedTable(tableNumber);
+  };
+
+  return (
+    <div>
+      <svg width="500" height="500">
+        {/* Example of a round table */}
+        <circle cx="250" cy="250" r="100" fill="lightgray" />
+        <text
+          x="250"
+          y="250"
+          fill="black"
+          textAnchor="middle"
+          fontSize="20px"
+          dy=".3em"
+          cursor="pointer"
+          onClick={() => handleSelectTable(1)}
+        >
+          Table 1
+        </text>
+      </svg>
+
+      {selectedTable ? <p>Selected Table: {selectedTable}</p> : <p>Select a table</p>}
+    </div>
+  );
+};
+
+export default SvgSeatingLayout;

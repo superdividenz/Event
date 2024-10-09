@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.expanding-button {
+  @apply text-white text-center cursor-pointer transition-all duration-300 ease-in-out rounded-lg shadow-md;
+}
+
+.initial-text {
+  @apply block p-4;
+}
+
+
+.expanding-button.expanded .expanded-info {
+  @apply opacity-100;
+}
+
+.speaker-icon {
+  @apply bg-gray-700 rounded-full w-16 h-16 mx-auto mb-2 flex items-center justify-center text-2xl;
+}
+
+.speaker-name {
+  @apply text-lg font-semibold mb-1;
+}
+
+.speaker-title {
+  @apply text-sm text-gray-300;
+}

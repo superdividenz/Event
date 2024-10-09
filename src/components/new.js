@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import TableLayout from './components/TableLayout';
 import Header from './components/Header';
+import Tagline from './components/Tagline';
 import SpeakerInfo from './components/SpeakerInfo';
 import MapModal from './components/MapModal';
 import FlyerModal from './components/FlyerModal';
-import ExpandingButton from './components/ExpandingButton'; // Add this import
 
 const initialTables = [
   { id: 1, seats: [{ id: 1, isOccupied: false }, { id: 2, isOccupied: true }], isSelected: false },
@@ -33,6 +33,7 @@ function App() {
         onOpenFlyer={() => setIsFlyerModalOpen(true)}
       />
       <main className="container mx-auto px-4 py-8 flex-grow">
+        <Tagline />
         <TableLayout tables={tables} onTableSelect={handleTableSelect} />
         <SpeakerInfo />
       </main>

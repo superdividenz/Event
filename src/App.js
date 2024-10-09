@@ -1,29 +1,40 @@
+// App.js
 import React, { useState } from 'react';
 import TableLayout from './components/TableLayout';
 import Header from './components/Header';
 import SpeakerInfo from './components/SpeakerInfo';
 import MapModal from './components/MapModal';
 import FlyerModal from './components/FlyerModal';
-import ExpandingButton from './components/ExpandingButton'; // Add this import
 
-const initialTables = [
-  { id: 1, seats: [{ id: 1, isOccupied: false }, { id: 2, isOccupied: true }], isSelected: false },
-  { id: 2, seats: [{ id: 1, isOccupied: false }, { id: 2, isOccupied: false }], isSelected: false },
-  { id: 3, seats: [{ id: 1, isOccupied: false }, { id: 2, isOccupied: false }, { id: 3, isOccupied: false }], isSelected: false },
-  { id: 4, seats: [{ id: 1, isOccupied: true }, { id: 2, isOccupied: true }, { id: 3, isOccupied: false }, { id: 4, isOccupied: true }], isSelected: true },
-];
+const initialTables = Array.from({ length: 60 }, (_, tableIndex) => {
+  const seats = Array.from({ length: 10 }, (_, seatIndex) => ({
+    id: seatIndex + 1,
+    isOccupied: false
+  }));
+  
+  // Randomly occupy 2 seats per table
+  const occupiedSeats = new Set();
+  while (occupiedSeats.size < 2) {
+    occupiedSeats.add(Math.floor(Math.random() * 10));
+  }
+  occupiedSeats.forEach(seatIndex => {
+    seats[seatIndex].isOccupied = true;
+  });
+
+  return {
+    id: tableIndex + 1,
+    seats,
+    isSelected: false
+  };
+});
 
 function App() {
-  const [tables, setTables] = useState(initialTables);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [isFlyerModalOpen, setIsFlyerModalOpen] = useState(false);
 
   const handleTableSelect = (tableId) => {
-    setTables(prevTables => 
-      prevTables.map(table => 
-        table.id === tableId ? {...table, isSelected: !table.isSelected} : table
-      )
-    );
+    // This function will be called by TableLayout component
+    console.log(`Table ${tableId} selected`);
   };
 
   return (
@@ -33,7 +44,7 @@ function App() {
         onOpenFlyer={() => setIsFlyerModalOpen(true)}
       />
       <main className="container mx-auto px-4 py-8 flex-grow">
-        <TableLayout tables={tables} onTableSelect={handleTableSelect} />
+        <TableLayout initialTables={initialTables} onTableSelect={handleTableSelect} />
         <SpeakerInfo />
       </main>
       <MapModal isOpen={isMapModalOpen} onClose={() => setIsMapModalOpen(false)} />

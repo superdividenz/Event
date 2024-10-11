@@ -4,6 +4,7 @@ import TableLayout from './components/TableLayout';
 import Header from './components/Header';
 import SpeakerInfo from './components/SpeakerInfo';
 import MapModal from './components/MapModal';
+
 import FlyerModal from './components/FlyerModal';
 
 const initialTables = Array.from({ length: 60 }, (_, tableIndex) => {
